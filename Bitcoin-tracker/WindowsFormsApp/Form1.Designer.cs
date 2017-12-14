@@ -1,6 +1,6 @@
 ﻿namespace WindowsFormsApp
 {
-    partial class Form1
+    public partial class Form1
     {
         /// <summary>
         /// Required designer variable.
@@ -192,13 +192,13 @@
         private System.Windows.Forms.DataGridView dataGridViewBPI;
         private System.Windows.Forms.Button btnShowTable;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox comboBoxCurrency;
+        public System.Windows.Forms.ComboBox comboBoxCurrency;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker dateTimeEndDate;
+        public System.Windows.Forms.DateTimePicker dateTimeEndDate;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.DateTimePicker dateTimeStartDate;
+        public System.Windows.Forms.DateTimePicker dateTimeStartDate;
     }
 }
 
