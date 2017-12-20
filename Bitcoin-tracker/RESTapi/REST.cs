@@ -7,7 +7,6 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Net;
 using System.Configuration;
-using System.Windows.Forms;
 
 
 
@@ -53,9 +52,9 @@ namespace RESTapi
         public string GetURL()
         {
             StringBuilder builder = new StringBuilder();
+            string endpoint = ConfigurationManager.AppSettings["endpoint"];
             string sStartDate = dateTimeStartDate.Text;
             string sEndDate = dateTimeEndDate.Text;
-            string endpoint = ConfigurationManager.AppSettings["endpoint"];
             string sCurrency = comboBoxCurrency.Text;
             builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
             return builder.ToString();

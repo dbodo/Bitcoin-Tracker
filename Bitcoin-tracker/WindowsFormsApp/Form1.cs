@@ -34,5 +34,16 @@ namespace WindowsFormsApp
         {
             string sCurrency = (string)comboBoxCurrency.SelectedItem;
         }
+
+            public string GetURL()
+        {
+            StringBuilder builder = new StringBuilder();
+            string endpoint = ConfigurationManager.AppSettings["endpoint"];
+            string sStartDate = this.dateTimeStartDate.Text;
+            string sEndDate = this.dateTimeEndDate.Text;
+            string sCurrency = this.comboBoxCurrency.Text;
+            builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
+            return builder.ToString();
+        }
     }
 }
