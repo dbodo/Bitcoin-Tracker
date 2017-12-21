@@ -24,8 +24,11 @@ namespace WindowsFormsApp
 
         private void btnShowTable_Click(object sender, EventArgs e)
         {
-            rest.GetURL();
-            lBitcoin = rest.getBitcoinPriceIndex();
+            string sStartDate = this.dateTimeStartDate.Text;
+            string sEndDate = this.dateTimeEndDate.Text;
+            string sCurrency = this.comboBoxCurrency.Text;
+            rest.GetURL(sStartDate, sEndDate, sCurrency);
+            lBitcoin = rest.getBitcoinPriceIndex(sStartDate, sEndDate, sCurrency);
             dataGridViewBPI.DataSource = lBitcoin;
 
         }
@@ -33,17 +36,6 @@ namespace WindowsFormsApp
         private void comboBoxCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
             string sCurrency = (string)comboBoxCurrency.SelectedItem;
-        }
-
-            public string GetURL()
-        {
-            StringBuilder builder = new StringBuilder();
-            string endpoint = ConfigurationManager.AppSettings["endpoint"];
-            string sStartDate = this.dateTimeStartDate.Text;
-            string sEndDate = this.dateTimeEndDate.Text;
-            string sCurrency = this.comboBoxCurrency.Text;
-            builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
-            return builder.ToString();
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Configuration;
 namespace RESTapi
 {
     public class REST
-    {      
+    {
         public static string GetHistoricalData(string url)
         {
             HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
@@ -30,32 +30,41 @@ namespace RESTapi
             webresponse.Close();
             return result;
         }
-        public List<Bitcoin> getBitcoinPriceIndex()
+        public List<Bitcoin> getBitcoinPriceIndex(string sStartDate, string sEndDate, string sCurrency)
         {
             REST Rest = new REST();
             List<Bitcoin> lBitcoinREST = new List<Bitcoin>();
-            string url = GetURL();
-            string sJson = REST.GetHistoricalData(url);
-            JArray json = JArray.Parse(sJson);
-            var oBitcoin = json["bpi"].ToList();
-            foreach (JProperty item in oBitcoin.Children())
+            string url = GetURL(sStartDate, sEndDate, sCurrency);
+            var sJson = JObject.Parse(GetHistoricalData(url));
+            var rates = sJson.SelectToken("bpi");
+            foreach (var rate in rates)
             {
+                var property = rate as JProperty;
+                string Date = property.Name;
+                float Val = (float)property.Value;
                 lBitcoinREST.Add(new Bitcoin
                 {
-                    DateTime = (string)item.Value,
-                    Value = (float)item.Value
+                    DateTime = Date,
+                    Value = Val
                 });
             }
             return lBitcoinREST;
         }
+            /*JArray json = JArray.Parse(sJson);
+         var oBitcoin = json["bpi"].ToList();
+         foreach (JProperty item in oBitcoin.Children())
+         {
+             lBitcoinREST.Add(new Bitcoin
+             {
+                 DateTime = (string)item.Value,
+                 Value = (float)item.Value
+             });
+         }*/
 
-        public string GetURL()
+    public string GetURL(string sStartDate, string sEndDate, string sCurrency)
         {
             StringBuilder builder = new StringBuilder();
-            string endpoint = ConfigurationManager.AppSettings["endpoint"];
-            string sStartDate = dateTimeStartDate.Text;
-            string sEndDate = dateTimeEndDate.Text;
-            string sCurrency = comboBoxCurrency.Text;
+            string endpoint = ConfigurationManager.AppSettings["endpoint"];      
             builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
             return builder.ToString();
         }

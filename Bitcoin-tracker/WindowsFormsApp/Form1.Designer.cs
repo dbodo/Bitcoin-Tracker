@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.dateTimeStartDate = new System.Windows.Forms.DateTimePicker();
             this.dataGridViewBPI = new System.Windows.Forms.DataGridView();
             this.btnShowTable = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -39,7 +40,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.dateTimeEndDate = new System.Windows.Forms.DateTimePicker();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.dateTimeStartDate = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBPI)).BeginInit();
@@ -47,6 +47,9 @@
             // 
             // tabControl1
             // 
+            this.tabControl1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(0, 1);
@@ -74,8 +77,21 @@
             this.tabPage1.Text = "Table";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // dateTimeStartDate
+            // 
+            this.dateTimeStartDate.CustomFormat = "yyyy-MM-dd";
+            this.dateTimeStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimeStartDate.Location = new System.Drawing.Point(101, 10);
+            this.dateTimeStartDate.Name = "dateTimeStartDate";
+            this.dateTimeStartDate.Size = new System.Drawing.Size(91, 20);
+            this.dateTimeStartDate.TabIndex = 9;
+            // 
             // dataGridViewBPI
             // 
+            this.dataGridViewBPI.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dataGridViewBPI.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridViewBPI.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridViewBPI.Location = new System.Drawing.Point(101, 42);
             this.dataGridViewBPI.Name = "dataGridViewBPI";
@@ -159,15 +175,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // dateTimeStartDate
-            // 
-            this.dateTimeStartDate.CustomFormat = "yyyy-MM-dd";
-            this.dateTimeStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimeStartDate.Location = new System.Drawing.Point(101, 10);
-            this.dateTimeStartDate.Name = "dateTimeStartDate";
-            this.dateTimeStartDate.Size = new System.Drawing.Size(91, 20);
-            this.dateTimeStartDate.TabIndex = 9;
             // 
             // Form1
             // 
