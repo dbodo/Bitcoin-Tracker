@@ -50,16 +50,6 @@ namespace RESTapi
             }
             return lBitcoinREST;
         }
-            /*JArray json = JArray.Parse(sJson);
-         var oBitcoin = json["bpi"].ToList();
-         foreach (JProperty item in oBitcoin.Children())
-         {
-             lBitcoinREST.Add(new Bitcoin
-             {
-                 DateTime = (string)item.Value,
-                 Value = (float)item.Value
-             });
-         }*/
 
     public string GetURL(string sStartDate, string sEndDate, string sCurrency)
         {
