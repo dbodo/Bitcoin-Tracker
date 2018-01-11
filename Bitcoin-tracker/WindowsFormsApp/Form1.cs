@@ -30,10 +30,11 @@ namespace WindowsFormsApp
             rest.GetURL(sStartDate, sEndDate, sCurrency);
             lBitcoin = rest.getBitcoinPriceIndex(sStartDate, sEndDate, sCurrency);
             dataGridViewBPI.DataSource = lBitcoin;
-            chartBPI.Series[0] = new System.Windows.Forms.DataVisualization.Charting.Series();
-            chartBPI.Series[0].XValueMember = dataGridViewBPI.Columns[0].DataPropertyName;
-            chartBPI.Series[0].YValueMembers = dataGridViewBPI.Columns[1].DataPropertyName;
-            chartBPI.DataSource = dataGridViewBPI.DataSource;
+            chart1.Series[0] = new System.Windows.Forms.DataVisualization.Charting.Series();
+            chart1.Series[0].XValueMember = dataGridViewBPI.Columns[0].DataPropertyName;
+            chart1.Series[0].YValueMembers = dataGridViewBPI.Columns[1].DataPropertyName;
+            chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            chart1.DataSource = dataGridViewBPI.DataSource;
         }
 
         private void comboBoxCurrency_SelectedIndexChanged(object sender, EventArgs e)

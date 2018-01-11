@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Threading;
 using System.Configuration;
+using DatabaseService;
+using RESTapi;
 
 namespace WindowsBitcoinLogService
 {
@@ -58,6 +60,14 @@ namespace WindowsBitcoinLogService
             int dueTime = Convert.ToInt32(timeSpan.TotalMilliseconds);
             // Promjena vremena izvršavanja metode povratnog poziva. 
             Schedular.Change(dueTime, Timeout.Infinite);
+        }
+
+        private static void SchedularCallback(object e)
+        {
+            BitcoinList BitcoinList = new BitcoinList();
+            Crud Crud= new Crud();
+            Crud.AddBitcoin()
+            ScheduleService();
         }
 
         protected override void OnStart(string[] args)

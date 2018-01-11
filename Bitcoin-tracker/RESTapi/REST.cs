@@ -51,6 +51,8 @@ namespace RESTapi
             return lBitcoinREST;
         }
 
+
+
     public string GetURL(string sStartDate, string sEndDate, string sCurrency)
         {
             StringBuilder builder = new StringBuilder();
