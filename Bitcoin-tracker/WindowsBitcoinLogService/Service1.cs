@@ -66,7 +66,6 @@ namespace WindowsBitcoinLogService
         {
             BitcoinList BitcoinList = new BitcoinList();
             Crud Crud= new Crud();
-            Crud.AddBitcoin()
             ScheduleService();
         }
 

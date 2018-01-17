@@ -18,7 +18,7 @@ namespace DatabaseService
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
-                oCommand.CommandText = "SELECT * FROM users";
+                oCommand.CommandText = "SELECT * FROM Bitcoin_PriceIndex";
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
                 {
@@ -36,7 +36,61 @@ namespace DatabaseService
             return lBitcoin;
         }
 
-        public void AddBitcoin(BitcoinList oBitcoin)
+        public List<CurrencyList> GetCurrency()
+        {
+            List<CurrencyList> lCurrency = new List<CurrencyList>();
+            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            {
+                oCommand.CommandText = "SELECT * FROM Bitcoin_Currency";
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+                    while (oReader.Read())
+                    {
+                        lCurrency.Add(new CurrencyList()
+                        {
+                            Currency = (string)oReader["Currency"]
+                        });
+                    }
+                }
+            }
+            return lCurrency;
+        }
+
+        public void AddCurrency(CurrencyList oCurrencyCode)
+        {
+            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            {
+                oCommand.CommandText = "INSERT INTO Bitcoin_Currency (Currency) VALUES('" + oCurrencyCode.Currency + "')";
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+
+                }
+            }
+        }
+
+        public void DeleteCurrency(CurrencyList oCurrencyCode)
+        {
+            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+            using (DbCommand oCommand = oConnection.CreateCommand())
+            {
+                oCommand.CommandText = "DELETE FROM Bitcoin_Currency WHERE Currency =  '" + oCurrencyCode.Currency + "'";
+                oConnection.Open();
+                using (DbDataReader oReader = oCommand.ExecuteReader())
+                {
+
+                }
+            }
+        }
+
+
+        /*public void AddBitcoin(BitcoinList oBitcoin)
         {
             String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
@@ -64,7 +118,7 @@ namespace DatabaseService
 
                 }
             }
-        }
+        }*/
 
     }
 }

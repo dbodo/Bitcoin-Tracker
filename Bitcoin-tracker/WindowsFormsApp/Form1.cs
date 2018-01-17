@@ -10,20 +10,28 @@ using System.Windows.Forms;
 using RESTapi;
 using Newtonsoft.Json.Linq;
 using System.Configuration;
+using DatabaseService;
 
 namespace WindowsFormsApp
 {
     public partial class Form1 : Form
     {
         public List<Bitcoin> lBitcoin;
-        REST rest = new REST();
         public Form1()
         {
-            InitializeComponent();           
+            InitializeComponent();
+            //lCurrency = crud.GetCurrency();
+            //comboBoxCurrency.DataSource = lCurrency;
+            Crud crud = new Crud();
+            List<CurrencyList> lCurrency = crud.GetCurrency();
+            comboBoxCurrency.DataSource = lCurrency;
+            dateTimeStartDate.MaxDate = DateTime.Now.AddDays(-1);
+            dateTimeEndDate.MaxDate = DateTime.Now;
         }
 
         private void btnShowTable_Click(object sender, EventArgs e)
         {
+            REST rest = new REST();
             string sStartDate = this.dateTimeStartDate.Text;
             string sEndDate = this.dateTimeEndDate.Text;
             string sCurrency = this.comboBoxCurrency.Text;
@@ -39,7 +47,31 @@ namespace WindowsFormsApp
 
         private void comboBoxCurrency_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string sCurrency = (string)comboBoxCurrency.SelectedItem;
+            string sCurrency = comboBoxCurrency.SelectedItem.ToString();
+        }
+
+        private void btnAddCurrency_Click(object sender, EventArgs e)
+        {
+            CurrencyList currency = new CurrencyList();
+            currency.Currency = inptCurrency.Text;
+            Crud crud = new Crud();
+            crud.AddCurrency(currency);
+            comboBoxCurrency.DataSource = crud.GetCurrency();
+        }
+
+        private void btnDeleteCurrency_Click(object sender, EventArgs e)
+        {
+            CurrencyList currency = new CurrencyList();
+            currency.Currency = inptCurrency.Text;
+            Crud crud = new Crud();
+            crud.DeleteCurrency(currency);
+            comboBoxCurrency.DataSource = crud.GetCurrency();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'dotNetDataSet.Bitcoin_Currency' table. You can move, or remove it, as needed.
+            this.bitcoin_CurrencyTableAdapter.Fill(this.dotNetDataSet.Bitcoin_Currency);
         }
     }
 }
