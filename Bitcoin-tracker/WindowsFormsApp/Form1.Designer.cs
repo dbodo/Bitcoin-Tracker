@@ -30,10 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabControl tabPages;
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.btnDeleteCurrency = new System.Windows.Forms.Button();
             this.btnAddCurrency = new System.Windows.Forms.Button();
             this.inptCurrency = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,20 +44,19 @@
             this.btnShowTable = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.comboBoxCurrency = new System.Windows.Forms.ComboBox();
+            this.bitcoinCurrencyBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dotNetDataSet = new WindowsFormsApp.DotNetDataSet();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.dateTimeEndDate = new System.Windows.Forms.DateTimePicker();
-            this.btnDeleteCurrency = new System.Windows.Forms.Button();
-            this.dotNetDataSet = new WindowsFormsApp.DotNetDataSet();
-            this.bitcoinCurrencyBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bitcoin_CurrencyTableAdapter = new WindowsFormsApp.DotNetDataSetTableAdapters.Bitcoin_CurrencyTableAdapter();
             tabPages = new System.Windows.Forms.TabControl();
             tabPages.SuspendLayout();
             this.tabPage1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBPI)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotNetDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bitcoinCurrencyBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotNetDataSet)).BeginInit();
             this.SuspendLayout();
             // 
             // tabPages
@@ -94,6 +94,18 @@
             this.tabPage1.Text = "Table";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // btnDeleteCurrency
+            // 
+            this.btnDeleteCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteCurrency.ForeColor = System.Drawing.Color.Crimson;
+            this.btnDeleteCurrency.Location = new System.Drawing.Point(750, 31);
+            this.btnDeleteCurrency.Name = "btnDeleteCurrency";
+            this.btnDeleteCurrency.Size = new System.Drawing.Size(64, 23);
+            this.btnDeleteCurrency.TabIndex = 14;
+            this.btnDeleteCurrency.Text = "DELETE";
+            this.btnDeleteCurrency.UseVisualStyleBackColor = true;
+            this.btnDeleteCurrency.Click += new System.EventHandler(this.btnDeleteCurrency_Click);
+            // 
             // btnAddCurrency
             // 
             this.btnAddCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -125,16 +137,16 @@
             // 
             // chart1
             // 
-            chartArea5.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart1.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(201, 60);
             this.chart1.Name = "chart1";
-            series5.ChartArea = "ChartArea1";
-            series5.Legend = "Legend1";
-            series5.Name = "Series1";
-            this.chart1.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
             this.chart1.Size = new System.Drawing.Size(618, 375);
             this.chart1.TabIndex = 10;
             this.chart1.Text = "chart1";
@@ -149,6 +161,7 @@
             this.dateTimeStartDate.Name = "dateTimeStartDate";
             this.dateTimeStartDate.Size = new System.Drawing.Size(85, 20);
             this.dateTimeStartDate.TabIndex = 9;
+            this.dateTimeStartDate.Value = new System.DateTime(2018, 1, 18, 0, 12, 41, 0);
             // 
             // dataGridViewBPI
             // 
@@ -167,7 +180,7 @@
             this.btnShowTable.BackColor = System.Drawing.Color.DodgerBlue;
             this.btnShowTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnShowTable.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.btnShowTable.Location = new System.Drawing.Point(521, 4);
+            this.btnShowTable.Location = new System.Drawing.Point(521, 3);
             this.btnShowTable.Name = "btnShowTable";
             this.btnShowTable.Size = new System.Drawing.Size(74, 23);
             this.btnShowTable.TabIndex = 7;
@@ -194,6 +207,16 @@
             this.comboBoxCurrency.Size = new System.Drawing.Size(117, 21);
             this.comboBoxCurrency.TabIndex = 5;
             this.comboBoxCurrency.SelectedIndexChanged += new System.EventHandler(this.comboBoxCurrency_SelectedIndexChanged);
+            // 
+            // bitcoinCurrencyBindingSource
+            // 
+            this.bitcoinCurrencyBindingSource.DataMember = "Bitcoin_Currency";
+            this.bitcoinCurrencyBindingSource.DataSource = this.dotNetDataSet;
+            // 
+            // dotNetDataSet
+            // 
+            this.dotNetDataSet.DataSetName = "DotNetDataSet";
+            this.dotNetDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // label3
             // 
@@ -225,28 +248,7 @@
             this.dateTimeEndDate.Name = "dateTimeEndDate";
             this.dateTimeEndDate.Size = new System.Drawing.Size(88, 20);
             this.dateTimeEndDate.TabIndex = 1;
-            // 
-            // btnDeleteCurrency
-            // 
-            this.btnDeleteCurrency.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeleteCurrency.ForeColor = System.Drawing.Color.Crimson;
-            this.btnDeleteCurrency.Location = new System.Drawing.Point(750, 31);
-            this.btnDeleteCurrency.Name = "btnDeleteCurrency";
-            this.btnDeleteCurrency.Size = new System.Drawing.Size(64, 23);
-            this.btnDeleteCurrency.TabIndex = 14;
-            this.btnDeleteCurrency.Text = "DELETE";
-            this.btnDeleteCurrency.UseVisualStyleBackColor = true;
-            this.btnDeleteCurrency.Click += new System.EventHandler(this.btnDeleteCurrency_Click);
-            // 
-            // dotNetDataSet
-            // 
-            this.dotNetDataSet.DataSetName = "DotNetDataSet";
-            this.dotNetDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // bitcoinCurrencyBindingSource
-            // 
-            this.bitcoinCurrencyBindingSource.DataMember = "Bitcoin_Currency";
-            this.bitcoinCurrencyBindingSource.DataSource = this.dotNetDataSet;
+            this.dateTimeEndDate.Value = new System.DateTime(2018, 1, 18, 0, 0, 0, 0);
             // 
             // bitcoin_CurrencyTableAdapter
             // 
@@ -266,8 +268,8 @@
             this.tabPage1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewBPI)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dotNetDataSet)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bitcoinCurrencyBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dotNetDataSet)).EndInit();
             this.ResumeLayout(false);
 
         }

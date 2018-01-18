@@ -12,6 +12,8 @@ using Newtonsoft.Json.Linq;
 using System.Configuration;
 using DatabaseService;
 
+
+
 namespace WindowsFormsApp
 {
     public partial class Form1 : Form
@@ -25,8 +27,8 @@ namespace WindowsFormsApp
             Crud crud = new Crud();
             List<CurrencyList> lCurrency = crud.GetCurrency();
             comboBoxCurrency.DataSource = lCurrency;
-            dateTimeStartDate.MaxDate = DateTime.Now.AddDays(-1);
-            dateTimeEndDate.MaxDate = DateTime.Now;
+            dateTimeStartDate.MaxDate = DateTime.Now.AddDays(-2);
+            dateTimeEndDate.MaxDate = DateTime.Now.AddDays(-1);
         }
 
         private void btnShowTable_Click(object sender, EventArgs e)
@@ -56,7 +58,13 @@ namespace WindowsFormsApp
             currency.Currency = inptCurrency.Text;
             Crud crud = new Crud();
             crud.AddCurrency(currency);
-            comboBoxCurrency.DataSource = crud.GetCurrency();
+
+            List<CurrencyList> lCurrency = crud.GetCurrency();
+            bitcoinCurrencyBindingSource.DataSource = lCurrency;
+            comboBoxCurrency.DataSource = bitcoinCurrencyBindingSource.DataSource;        
+                     
+            comboBoxCurrency.DisplayMember = "Currency";
+            //comboBoxCurrency.DataSource = crud.GetCurrency();
         }
 
         private void btnDeleteCurrency_Click(object sender, EventArgs e)

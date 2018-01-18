@@ -10,36 +10,11 @@ using System.Data.SqlClient;
 namespace DatabaseService
 {
     public class Crud
-    {
-        public List<BitcoinList> GetBitcoin()
-        {
-            List<BitcoinList> lBitcoin = new List<BitcoinList>();
-            String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
-            using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
-            using (DbCommand oCommand = oConnection.CreateCommand())
-            {
-                oCommand.CommandText = "SELECT * FROM Bitcoin_PriceIndex";
-                oConnection.Open();
-                using (DbDataReader oReader = oCommand.ExecuteReader())
-                {
-                    while (oReader.Read())
-                    {
-                        lBitcoin.Add(new BitcoinList()
-                        {
-                            DateTime = (string)oReader["DateTime"],
-                            Value = (float)oReader["Value"], 
-                            Currency = (float)oReader["Currency"]                         
-                        });
-                    }
-                }
-            }
-            return lBitcoin;
-        }
-
+    {      
         public List<CurrencyList> GetCurrency()
         {
             List<CurrencyList> lCurrency = new List<CurrencyList>();
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            string sSqlConnectionString = "Data Source=193.198.57.183; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
@@ -61,7 +36,7 @@ namespace DatabaseService
 
         public void AddCurrency(CurrencyList oCurrencyCode)
         {
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            string sSqlConnectionString = "Data Source=193.198.57.183; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
@@ -76,11 +51,11 @@ namespace DatabaseService
 
         public void DeleteCurrency(CurrencyList oCurrencyCode)
         {
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = /; Password = /";
+            string sSqlConnectionString = "Data Source=193.198.57.183; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
-                oCommand.CommandText = "DELETE FROM Bitcoin_Currency WHERE Currency =  '" + oCurrencyCode.Currency + "'";
+                oCommand.CommandText = "DELETE FROM Bitcoin_Currency WHERE Currency = '" + oCurrencyCode.Currency + "'";
                 oConnection.Open();
                 using (DbDataReader oReader = oCommand.ExecuteReader())
                 {
@@ -88,6 +63,31 @@ namespace DatabaseService
                 }
             }
         }
+
+        /*public List<BitcoinList> GetBitcoin()
+       {
+           List<BitcoinList> lBitcoin = new List<BitcoinList>();
+           String sSqlConnectionString = ConfigurationManager.ConnectionStrings["DbConnection"].ConnectionString;
+           using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
+           using (DbCommand oCommand = oConnection.CreateCommand())
+           {
+               oCommand.CommandText = "SELECT * FROM Bitcoin_PriceIndex";
+               oConnection.Open();
+               using (DbDataReader oReader = oCommand.ExecuteReader())
+               {
+                   while (oReader.Read())
+                   {
+                       lBitcoin.Add(new BitcoinList()
+                       {
+                           DateTime = (string)oReader["DateTime"],
+                           Value = (float)oReader["Value"], 
+                           Currency = (float)oReader["Currency"]                         
+                       });
+                   }
+               }
+           }
+           return lBitcoin;
+       }*/
 
 
         /*public void AddBitcoin(BitcoinList oBitcoin)

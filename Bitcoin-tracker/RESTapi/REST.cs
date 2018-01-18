@@ -30,6 +30,7 @@ namespace RESTapi
             webresponse.Close();
             return result;
         }
+
         public List<Bitcoin> getBitcoinPriceIndex(string sStartDate, string sEndDate, string sCurrency)
         {
             REST Rest = new REST();
@@ -50,8 +51,6 @@ namespace RESTapi
             }
             return lBitcoinREST;
         }
-
-
 
     public string GetURL(string sStartDate, string sEndDate, string sCurrency)
         {
