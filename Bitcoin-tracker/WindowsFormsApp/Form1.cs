@@ -19,6 +19,7 @@ namespace WindowsFormsApp
     public partial class Form1 : Form
     {
         public List<Bitcoin> lBitcoin;
+        public List<BitcoinPrice> lBitcoinPrice;
         public Form1()
         {
             InitializeComponent();
@@ -26,7 +27,13 @@ namespace WindowsFormsApp
             //comboBoxCurrency.DataSource = lCurrency;
             Crud crud = new Crud();
             List<CurrencyList> lCurrency = crud.GetCurrency();
-            comboBoxCurrency.DataSource = lCurrency;
+            bitcoinCurrencyBindingSource.DataSource = lCurrency;
+            comboBoxCurrency.DataSource = bitcoinCurrencyBindingSource.DataSource;
+            comboBoxCurrency.DisplayMember = "Currency";
+            comboBoxCurrency2.DataSource = bitcoinCurrencyBindingSource.DataSource;
+            comboBoxCurrency2.DisplayMember = "Currency";
+            //labelValue.Text = "sranje";
+
             dateTimeStartDate.MaxDate = DateTime.Now.AddDays(-2);
             dateTimeEndDate.MaxDate = DateTime.Now.AddDays(-1);
         }
@@ -57,8 +64,9 @@ namespace WindowsFormsApp
             CurrencyList currency = new CurrencyList();
             currency.Currency = inptCurrency.Text;
             Crud crud = new Crud();
-            crud.AddCurrency(currency);
-
+            if (!comboBoxCurrency.Items.Contains(currency.Currency)){
+                crud.AddCurrency(currency);
+            }
             List<CurrencyList> lCurrency = crud.GetCurrency();
             bitcoinCurrencyBindingSource.DataSource = lCurrency;
             comboBoxCurrency.DataSource = bitcoinCurrencyBindingSource.DataSource;        
@@ -80,6 +88,25 @@ namespace WindowsFormsApp
         {
             // TODO: This line of code loads data into the 'dotNetDataSet.Bitcoin_Currency' table. You can move, or remove it, as needed.
             this.bitcoin_CurrencyTableAdapter.Fill(this.dotNetDataSet.Bitcoin_Currency);
+        }
+
+        private void comboBoxCurrency2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string sCode = comboBoxCurrency2.SelectedItem.ToString();
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            REST rest = new REST();
+            string sCurrency = this.comboBoxCurrency2.Text;
+            rest.GetURL2(sCurrency);
+            lBitcoinPrice = rest.GetBitcoinCurrentPrice(sCurrency);
+           
         }
     }
 }

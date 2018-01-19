@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bitcoin.cs" />
+    <Compile Include="BitcoinPrice.cs" />
     <Compile Include="REST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
