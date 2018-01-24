@@ -14,7 +14,7 @@ namespace DatabaseService
         public List<CurrencyList> GetCurrency()
         {
             List<CurrencyList> lCurrency = new List<CurrencyList>();
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
+            string sSqlConnectionString = "Data Source=; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
@@ -36,7 +36,7 @@ namespace DatabaseService
 
         public void AddCurrency(CurrencyList oCurrencyCode)
         {
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
+            string sSqlConnectionString = "Data Source=; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {
@@ -51,7 +51,7 @@ namespace DatabaseService
 
         public void DeleteCurrency(CurrencyList oCurrencyCode)
         {
-            string sSqlConnectionString = "Data Source=/; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
+            string sSqlConnectionString = "Data Source=; Initial Catalog = DotNet;User ID = vjezbe; Password = vjezbe";
             using (DbConnection oConnection = new SqlConnection(sSqlConnectionString))
             using (DbCommand oCommand = oConnection.CreateCommand())
             {

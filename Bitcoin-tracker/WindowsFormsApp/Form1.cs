@@ -32,10 +32,10 @@ namespace WindowsFormsApp
             comboBoxCurrency.DisplayMember = "Currency";
             comboBoxCurrency2.DataSource = bitcoinCurrencyBindingSource.DataSource;
             comboBoxCurrency2.DisplayMember = "Currency";
-            //labelValue.Text = "sranje";
 
-            dateTimeStartDate.MaxDate = DateTime.Now.AddDays(-2);
-            dateTimeEndDate.MaxDate = DateTime.Now.AddDays(-1);
+            dateTimeStartDate.Value = DateTime.Today.AddDays(-8);
+            dateTimeStartDate.MaxDate = DateTime.Today.AddDays(-2);
+            dateTimeEndDate.MaxDate = DateTime.Today.AddDays(-1);
         }
 
         private void btnShowTable_Click(object sender, EventArgs e)
@@ -103,10 +103,31 @@ namespace WindowsFormsApp
         private void button1_Click(object sender, EventArgs e)
         {
             REST rest = new REST();
+            BitcoinPrice btcPrice = new BitcoinPrice();
+
             string sCurrency = this.comboBoxCurrency2.Text;
             rest.GetURL2(sCurrency);
-            lBitcoinPrice = rest.GetBitcoinCurrentPrice(sCurrency);
-           
+            lBitcoinPrice = rest.GetBitcoinCurrentPrice(sCurrency);       
+            float BtcPrice = btcPrice.rate;
+            System.Diagnostics.Debug.WriteLine(btcPrice.rate);
+
+            float BtcAmount = (float)Convert.ToSingle(inptBtc.Text);
+            System.Diagnostics.Debug.WriteLine(BtcAmount);
+
+            float calculate = (float)BtcPrice * BtcAmount;
+            System.Diagnostics.Debug.WriteLine(calculate);
+
+            lblValueCalculated.Text = calculate.ToString();
+            //lblValueCalculated.Text = btcPrice.rate;
+        }
+
+        private void inptBtc_TextChanged(object sender, EventArgs e)
+        {
+            /*char ch = e.KeyChar;
+            if (!Char.IsDigit(ch))
+            {
+                e.Handled = true;
+            }*/
         }
     }
 }

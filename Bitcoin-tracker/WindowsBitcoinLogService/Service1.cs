@@ -64,8 +64,6 @@ namespace WindowsBitcoinLogService
 
         private static void SchedularCallback(object e)
         {
-            BitcoinList BitcoinList = new BitcoinList();
-            Crud Crud= new Crud();
             ScheduleService();
         }
 

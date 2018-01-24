@@ -10,6 +10,5 @@ namespace DatabaseService
     {
         public string DateTime { get; set; }
         public float Value { get; set; }
-        public float Currency { get; set; }
     }
 }

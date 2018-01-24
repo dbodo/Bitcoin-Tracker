@@ -8,7 +8,6 @@ namespace RESTapi
 {
     public class BitcoinPrice
     {
-        public string code { get; set; }
         public float rate { get; set; }
     }
 }

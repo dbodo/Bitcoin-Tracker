@@ -105,9 +105,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\DatabaseService\DatabaseService.csproj">
+    <ProjectReference Include="..\DatabaseService\CRUD.csproj">
       <Project>{00c37cfc-fece-406f-a8cf-30a86deb76c0}</Project>
-      <Name>DatabaseService</Name>
+      <Name>CRUD</Name>
     </ProjectReference>
     <ProjectReference Include="..\RESTapi\RESTapi.csproj">
       <Project>{3dec9b09-5756-4d59-be4f-61808a216033}</Project>

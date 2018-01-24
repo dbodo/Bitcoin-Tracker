@@ -30,12 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.TabControl tabPages;
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.btnCalculate = new System.Windows.Forms.Button();
-            this.labelValue = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblValueCalculated = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -81,8 +81,8 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.btnCalculate);
-            this.tabPage1.Controls.Add(this.labelValue);
+            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.lblValueCalculated);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.label7);
             this.tabPage1.Controls.Add(this.label6);
@@ -111,27 +111,27 @@
             this.tabPage1.UseVisualStyleBackColor = true;
             this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
             // 
-            // btnCalculate
+            // button1
             // 
-            this.btnCalculate.BackColor = System.Drawing.Color.DodgerBlue;
-            this.btnCalculate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCalculate.ForeColor = System.Drawing.SystemColors.InactiveBorder;
-            this.btnCalculate.Location = new System.Drawing.Point(416, 52);
-            this.btnCalculate.Name = "btnCalculate";
-            this.btnCalculate.Size = new System.Drawing.Size(75, 23);
-            this.btnCalculate.TabIndex = 22;
-            this.btnCalculate.Text = "Calculate";
-            this.btnCalculate.UseVisualStyleBackColor = false;
-            this.btnCalculate.Click += new System.EventHandler(this.button1_Click);
+            this.button1.BackColor = System.Drawing.Color.DodgerBlue;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.ForeColor = System.Drawing.SystemColors.InactiveBorder;
+            this.button1.Location = new System.Drawing.Point(414, 50);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 22;
+            this.button1.Text = "Calculate";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // labelValue
+            // lblValueCalculated
             // 
-            this.labelValue.AutoSize = true;
-            this.labelValue.Location = new System.Drawing.Point(453, 31);
-            this.labelValue.Name = "labelValue";
-            this.labelValue.Size = new System.Drawing.Size(12, 13);
-            this.labelValue.TabIndex = 21;
-            this.labelValue.Text = "x";
+            this.lblValueCalculated.AutoSize = true;
+            this.lblValueCalculated.Location = new System.Drawing.Point(454, 30);
+            this.lblValueCalculated.Name = "lblValueCalculated";
+            this.lblValueCalculated.Size = new System.Drawing.Size(10, 13);
+            this.lblValueCalculated.TabIndex = 21;
+            this.lblValueCalculated.Text = ".";
             // 
             // label8
             // 
@@ -154,7 +154,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(392, 6);
+            this.label6.Location = new System.Drawing.Point(358, 6);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(120, 15);
             this.label6.TabIndex = 18;
@@ -166,11 +166,12 @@
             this.inptBtc.Name = "inptBtc";
             this.inptBtc.Size = new System.Drawing.Size(68, 20);
             this.inptBtc.TabIndex = 17;
+            this.inptBtc.TextChanged += new System.EventHandler(this.inptBtc_TextChanged);
             // 
             // comboBoxCurrency2
             // 
             this.comboBoxCurrency2.FormattingEnabled = true;
-            this.comboBoxCurrency2.Location = new System.Drawing.Point(498, 27);
+            this.comboBoxCurrency2.Location = new System.Drawing.Point(340, 52);
             this.comboBoxCurrency2.Name = "comboBoxCurrency2";
             this.comboBoxCurrency2.Size = new System.Drawing.Size(68, 21);
             this.comboBoxCurrency2.TabIndex = 16;
@@ -229,16 +230,16 @@
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(259, 104);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(560, 331);
             this.chart1.TabIndex = 10;
             this.chart1.Text = "chart1";
@@ -249,11 +250,11 @@
             this.dateTimeStartDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimeStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeStartDate.Location = new System.Drawing.Point(43, 18);
-            this.dateTimeStartDate.MaxDate = new System.DateTime(2018, 1, 18, 0, 12, 41, 0);
+            this.dateTimeStartDate.MaxDate = new System.DateTime(2018, 1, 24, 0, 0, 0, 0);
             this.dateTimeStartDate.Name = "dateTimeStartDate";
             this.dateTimeStartDate.Size = new System.Drawing.Size(84, 20);
             this.dateTimeStartDate.TabIndex = 9;
-            this.dateTimeStartDate.Value = new System.DateTime(2018, 1, 18, 0, 12, 41, 0);
+            this.dateTimeStartDate.Value = new System.DateTime(2018, 1, 24, 0, 0, 0, 0);
             // 
             // dataGridViewBPI
             // 
@@ -336,11 +337,11 @@
             this.dateTimeEndDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dateTimeEndDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimeEndDate.Location = new System.Drawing.Point(43, 44);
-            this.dateTimeEndDate.MaxDate = new System.DateTime(2018, 1, 18, 0, 0, 0, 0);
+            this.dateTimeEndDate.MaxDate = new System.DateTime(2018, 1, 24, 0, 0, 0, 0);
             this.dateTimeEndDate.Name = "dateTimeEndDate";
             this.dateTimeEndDate.Size = new System.Drawing.Size(84, 20);
             this.dateTimeEndDate.TabIndex = 1;
-            this.dateTimeEndDate.Value = new System.DateTime(2018, 1, 18, 0, 0, 0, 0);
+            this.dateTimeEndDate.Value = new System.DateTime(2018, 1, 24, 0, 0, 0, 0);
             // 
             // bitcoin_CurrencyTableAdapter
             // 
@@ -390,8 +391,8 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox inptBtc;
         private System.Windows.Forms.ComboBox comboBoxCurrency2;
-        private System.Windows.Forms.Label labelValue;
-        private System.Windows.Forms.Button btnCalculate;
+        private System.Windows.Forms.Label lblValueCalculated;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -55,29 +55,23 @@ namespace RESTapi
         public string GetURL(string sStartDate, string sEndDate, string sCurrency)
         {
             StringBuilder builder = new StringBuilder();
-            string endpoint = ConfigurationManager.AppSettings["endpoint"];
+            string endpoint = ConfigurationManager.AppSettings["endpointHistory"];
             builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
             return builder.ToString();
         }
 
-        public List<BitcoinPrice> GetBitcoinCurrentPrice(string cCode)
+        public List<BitcoinPrice> GetBitcoinCurrentPrice(string sCurrency)
         {
             //Citanje vrijednosti iz JSON-a
             List<BitcoinPrice> lBtcCurrentPrice = new List<BitcoinPrice>();
-            string sUrl = GetURL2(cCode);
-            var sJson = JObject.Parse(GetCurrentData(sUrl));
-            var rates = sJson.SelectToken(cCode);
-            foreach (JObject item in rates)
-            {
-                string sCode = (string)item.GetValue("code");
-                float fRate = (float)item.GetValue("rate");
-                //Dodavanje objekata u listu
+            string sUrl = GetURL2(sCurrency);
+            var sJson = JObject.Parse(GetCurrentData(sUrl));           
+                float fRate = (float)sJson.SelectToken("bpi." + sCurrency + ".rate");
+                 System.Diagnostics.Debug.WriteLine(fRate);
                 lBtcCurrentPrice.Add(new BitcoinPrice
                 {
-                    code = sCode,
                     rate = fRate
-                });
-            }
+                });       
             return lBtcCurrentPrice;
         }
 
@@ -101,9 +95,8 @@ namespace RESTapi
         public string GetURL2(string sCode)
         {
             StringBuilder builder = new StringBuilder();
-            //string endpoint = ConfigurationManager.AppSettings["endpoint"];
-            string url = "https://api.coindesk.com/v1/bpi/currentprice/";
-            builder.Append(url + sCode + ".json");
+            string endpoint = ConfigurationManager.AppSettings["endpointCurrent"];
+            builder.Append(endpoint + sCode + ".json");
             return builder.ToString();
         }
     }
