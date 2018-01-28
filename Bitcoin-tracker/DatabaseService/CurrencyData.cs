@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseService
 {
-    public class CurrencyList
+    public class CurrencyData
     {
         public string Currency { get; set; }
     }

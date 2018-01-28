@@ -8,8 +8,6 @@ using System.IO;
 using System.Net;
 using System.Configuration;
 
-
-
 namespace RESTapi
 {
     public class REST
@@ -18,8 +16,8 @@ namespace RESTapi
         {
             REST Rest = new REST();
             List<Bitcoin> lBitcoinREST = new List<Bitcoin>();
-            string url = GetURL(sStartDate, sEndDate, sCurrency);
-            var sJson = JObject.Parse(GetHistoricalData(url));
+            string url = GetURLhistorical(sStartDate, sEndDate, sCurrency);
+            var sJson = JObject.Parse(GetData(url));
             var rates = sJson.SelectToken("bpi");
             foreach (var rate in rates)
             {
@@ -35,7 +33,19 @@ namespace RESTapi
             return lBitcoinREST;
         }
 
-        public static string GetHistoricalData(string url)
+        public BitcoinPrice GetBitcoinCurrentPrice(string sCurrency)
+        {
+            BitcoinPrice btcCurrentPrice = new BitcoinPrice();
+            string sUrl = GetURLcurrent(sCurrency);
+            var sJson = JObject.Parse(GetData(sUrl));
+            btcCurrentPrice.rate = (float)sJson.SelectToken("bpi." + sCurrency + ".rate");
+            btcCurrentPrice.time = (string)sJson.SelectToken("time.updateduk");
+            System.Diagnostics.Debug.WriteLine(btcCurrentPrice.rate);
+            System.Diagnostics.Debug.WriteLine(btcCurrentPrice.time);
+            return btcCurrentPrice;
+        }
+
+        public static string GetData(string url)
         {
             HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
             webrequest.Method = "GET";
@@ -52,47 +62,15 @@ namespace RESTapi
             return result;
         }
 
-        public string GetURL(string sStartDate, string sEndDate, string sCurrency)
+        public string GetURLhistorical(string sStartDate, string sEndDate, string sCurrency)
         {
             StringBuilder builder = new StringBuilder();
-            string endpoint = ConfigurationManager.AppSettings["endpointHistory"];
+            string endpoint = ConfigurationManager.AppSettings["endpointHistorical"];
             builder.Append(endpoint + "?start=" + sStartDate + "&end=" + sEndDate + "&currency=" + sCurrency);
             return builder.ToString();
         }
 
-        public List<BitcoinPrice> GetBitcoinCurrentPrice(string sCurrency)
-        {
-            //Citanje vrijednosti iz JSON-a
-            List<BitcoinPrice> lBtcCurrentPrice = new List<BitcoinPrice>();
-            string sUrl = GetURL2(sCurrency);
-            var sJson = JObject.Parse(GetCurrentData(sUrl));           
-                float fRate = (float)sJson.SelectToken("bpi." + sCurrency + ".rate");
-                 System.Diagnostics.Debug.WriteLine(fRate);
-                lBtcCurrentPrice.Add(new BitcoinPrice
-                {
-                    rate = fRate
-                });       
-            return lBtcCurrentPrice;
-        }
-
-        public static string GetCurrentData(string url)
-        {
-            HttpWebRequest webrequest = (HttpWebRequest)WebRequest.Create(url);
-            webrequest.Method = "GET";
-            webrequest.ContentType = "application/x-www-form-urlencoded";
-            //webrequest.Headers.Add("Username", "xyz");
-            //webrequest.Headers.Add("Password", "abc");
-            HttpWebResponse webresponse = (HttpWebResponse)webrequest.GetResponse();
-            Encoding enc = System.Text.Encoding.GetEncoding("utf-8");
-            StreamReader responseStream = new StreamReader(webresponse.GetResponseStream(),
-            enc);
-            string result = string.Empty;
-            result = responseStream.ReadToEnd();
-            webresponse.Close();
-            return result;
-        }
-
-        public string GetURL2(string sCode)
+        public string GetURLcurrent(string sCode)
         {
             StringBuilder builder = new StringBuilder();
             string endpoint = ConfigurationManager.AppSettings["endpointCurrent"];
