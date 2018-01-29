@@ -25,7 +25,7 @@ namespace WindowsFormsApp
             Crud crud = new Crud();
             List<CurrencyData> lCurrency = crud.GetCurrency();
 
-
+            chart1.Series[0] = new System.Windows.Forms.DataVisualization.Charting.Series();
             chart1.Series[0].ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
             chart1.Series[0].BorderWidth = 4;
             chart1.Series[0].Color = Color.FromArgb(43, 54, 83);
